@@ -5,21 +5,21 @@
 class Slacko < Formula
   desc "A lightweight, keyboard-driven TUI client for Slack"
   homepage "https://github.com/m96-chan/Slacko"
-  version "0.1.0"
+  version "0.2.0"
   license "MIT"
 
   on_macos do
     if Hardware::CPU.intel?
-      url "https://github.com/m96-chan/Slacko/releases/download/v0.1.0/Slacko_0.1.0_darwin_amd64.tar.gz"
-      sha256 "d8a0c1b471de6953031a9e47d4da19f0a06ed67b05a709ad30c17e2195b19a2d"
+      url "https://github.com/m96-chan/Slacko/releases/download/v0.2.0/Slacko_0.2.0_darwin_amd64.tar.gz"
+      sha256 "97dede279f619e495c3dc98989800f5bd96b5ddf97bc0c7066e3f9ef28d7a290"
 
       define_method(:install) do
         bin.install "slacko"
       end
     end
     if Hardware::CPU.arm?
-      url "https://github.com/m96-chan/Slacko/releases/download/v0.1.0/Slacko_0.1.0_darwin_arm64.tar.gz"
-      sha256 "626121c29817c11bbd718563c26d0ed9924392034d5ab95c1a2d181f0fa62f23"
+      url "https://github.com/m96-chan/Slacko/releases/download/v0.2.0/Slacko_0.2.0_darwin_arm64.tar.gz"
+      sha256 "f88907b670e1b778af8c9c4b8d2aae59bfffaa084992ca7967e911add9a25829"
 
       define_method(:install) do
         bin.install "slacko"
@@ -29,15 +29,15 @@ class Slacko < Formula
 
   on_linux do
     if Hardware::CPU.intel? && Hardware::CPU.is_64_bit?
-      url "https://github.com/m96-chan/Slacko/releases/download/v0.1.0/Slacko_0.1.0_linux_amd64.tar.gz"
-      sha256 "f978e4311cd1a51e408f04f37aea44d34a5fb3dcec12db90ce36094ca0219215"
+      url "https://github.com/m96-chan/Slacko/releases/download/v0.2.0/Slacko_0.2.0_linux_amd64.tar.gz"
+      sha256 "06238e1086c1ffb1ee795328236129e23eb6115f896445daa9a2158a51c05274"
       define_method(:install) do
         bin.install "slacko"
       end
     end
     if Hardware::CPU.arm? && Hardware::CPU.is_64_bit?
-      url "https://github.com/m96-chan/Slacko/releases/download/v0.1.0/Slacko_0.1.0_linux_arm64.tar.gz"
-      sha256 "18a9d260650d4dfd50662be241cda0b6a3e42b35019144f3d4eebe19bad7499a"
+      url "https://github.com/m96-chan/Slacko/releases/download/v0.2.0/Slacko_0.2.0_linux_arm64.tar.gz"
+      sha256 "60a3e2066eabe6a95e6d739c9a87d5830a5b5fbc8db010238068e6763c6bdd1c"
       define_method(:install) do
         bin.install "slacko"
       end
