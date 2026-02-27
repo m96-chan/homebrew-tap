@@ -1,6 +1,6 @@
 cask "ktapple" do
-  version "1.1.0"
-  sha256 "c2414918024eb16f04b3ccfedd85df71aa09dab5734ec413867514ba0d345b3e"
+  version "1.2.0"
+  sha256 "6af38ac23fe9e282dd35014122f1a98a86b6ddf2608910df52cadce204a1c7fc"
 
   url "https://github.com/m96-chan/KTApple/releases/download/v#{version}/KTApple-#{version}-arm64.dmg"
   name "KTApple"
