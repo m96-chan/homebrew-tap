@@ -1,6 +1,6 @@
 cask "virtualcamera4mac" do
-  version "0.0.5"
-  sha256 "eaf3ff81865fcd3bc89e075cb3d6aa539a90aa4071bc49a3595de49ac56090f5"
+  version "0.0.6"
+  sha256 "55040963f1d641ca746dc50696422c3cac1625c297438a60b9ac5c9c88efbdf2"
 
   url "https://github.com/m96-chan/VirtualCamera4Mac/releases/download/v#{version}/VirtualCamera4Mac-#{version}.dmg"
   name "VirtualCamera4Mac"
