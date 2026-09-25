@@ -42,14 +42,19 @@ def check(path: pathlib.Path) -> list[str]:
     declared = field(text, "sha256")
     url = field(text, "url")
 
-    for label, value in (("version", version), ("sha256", declared), ("url", url)):
+    for label, value in (("sha256", declared), ("url", url)):
         if not value:
             problems.append(f"{path}: no {label} field found")
+    # Casks interpolate the version into the URL. A formula spells the URL out
+    # and lets Homebrew read the version from it; `brew audit --strict` rejects
+    # a `version` line that only repeats what the URL already says.
+    if url and "#{version}" in url:
+        if version:
+            url = url.replace("#{version}", version)
+        else:
+            problems.append(f"{path}: url uses #{{version}} but there is no version field")
     if problems:
         return problems
-
-    # Casks interpolate the version into the URL.
-    url = url.replace("#{version}", version)
 
     if not url.startswith(ALLOWED_URL_PREFIXES):
         allowed = ", ".join(ALLOWED_URL_PREFIXES)
@@ -69,7 +74,7 @@ def check(path: pathlib.Path) -> list[str]:
             f"    actual:   {actual}"
         )
     else:
-        print(f"  ok  {path.name}  v{version}  {actual[:16]}…")
+        print(f"  ok  {path.name}  {url.rsplit('/', 1)[-1]}  {actual[:16]}…")
 
     return problems
 
