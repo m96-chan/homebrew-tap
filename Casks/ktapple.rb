@@ -1,13 +1,13 @@
 cask "ktapple" do
-  version "1.3.0"
-  sha256 "f63ea929858744f7b69720c07979ed11d0f06dfb0d06802336f00837fb71506b"
+  version "2.0.0"
+  sha256 "edc93450e29b844090b0b6bfa138922882be6a8b86b613514e0bb513c80e27ce"
 
   url "https://github.com/m96-chan/KTApple/releases/download/v#{version}/KTApple-#{version}-arm64.dmg"
   name "KTApple"
   desc "KDE Plasma KWin-style tiling window manager for macOS"
   homepage "https://github.com/m96-chan/KTApple"
 
-  depends_on macos: ">= :ventura"
+  depends_on macos: ">= :sequoia"
 
   app "KTApple.app"
 
