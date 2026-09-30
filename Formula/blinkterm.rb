@@ -8,8 +8,8 @@ class Blinkterm < Formula
   # GitHub's archive of the tag; RELEASING.md ("Homebrew") says how both lines
   # are made on each release. `head` stays below, so `--HEAD` keeps installing
   # main.
-  url "https://github.com/m96-chan/blinkterm/archive/refs/tags/v0.1.0.tar.gz"
-  sha256 "84cbea74248e2ec64ae57b8c06f181032c8528ea87c166ee6167b4236b64feef"
+  url "https://github.com/m96-chan/blinkterm/archive/refs/tags/v0.3.0.tar.gz"
+  sha256 "848b7f1cb433fb43a98e8bf61c5182ea1254349a118233b4c69e510bb490b125"
   license "MIT"
   head "https://github.com/m96-chan/blinkterm.git", branch: "main"
 
@@ -17,18 +17,14 @@ class Blinkterm < Formula
   # `brew audit --strict` checks components in, and it refuses the other.
   depends_on "rust" => :build
 
-  # It compiles for macOS (`cargo check --target x86_64-apple-darwin` is
-  # clean) but has never run there, and a formula that installs is a promise
-  # that it works. This line comes out when #21 has run the engine tests on a
-  # Mac; a macOS line in the caveats below goes in at the same time.
-  depends_on :linux
+  # No platform requirement: v0.2.0 is the first release that runs on macOS
+  # (ci.yml's `mac` job runs the engine tests on macos-15), and
+  # homebrew.yml builds this formula there as well as on Linux.
 
   def install
     # std_cargo_args is `--jobs N --locked --root=#{prefix} --path=.`.
-    # --locked matters more here than in most crates: every dependency but
-    # libc is a git revision of tOS and Cargo.lock is the only record of which
-    # tree was built. cargo fetches those from github.com during the build;
-    # Homebrew allows a build network access unless a formula says otherwise,
+    # --locked, so the build is the tree CI tested. cargo fetches libc from
+    # crates.io during the build; Homebrew allows a build network access unless a formula says otherwise,
     # under Linux's Landlock sandbox as on macOS, and this one does not.
     system "cargo", "install", *std_cargo_args
   end
@@ -46,7 +42,13 @@ class Blinkterm < Formula
 
         export BLINKTERM_ENGINE=/opt/chrome-headless-shell-linux64/chrome-headless-shell
 
-      The README's "Installing" section has the exact download and the
+      On a Mac with Apple silicon, the same version's mac-arm64 build:
+
+        export BLINKTERM_ENGINE=~/engine/chrome-headless-shell-mac-arm64/chrome-headless-shell
+
+      A Google Chrome or Chromium in /Applications is found without that.
+
+      docs/install.md in the repository has the exact download and the
       libraries it wants. Debian's chromium-shell package is Chromium's
       content_shell, not a headless shell: it keeps a DevTools port open beside
       the pipe and does not close when asked, so a profile is never flushed.
